@@ -81,12 +81,10 @@ jobs:
           docker build -t richardaddo/multi-worker ./worker
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Push the Docker image
         run: |
-          docker push richardaddo/multi-client:latest
-          docker push richardaddo/multi-server:latest
-          docker push richardaddo/multi-nginx:latest
-          docker push richardaddo/multi-worker:latest
+          docker push richardaddo/multi-client
+          docker push richardaddo/multi-server
+          docker push richardaddo/multi-nginx
+          docker push richardaddo/multi-worker
