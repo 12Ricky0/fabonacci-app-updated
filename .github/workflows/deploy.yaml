@@ -72,6 +72,11 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: test
     steps:
+      - name: Debug secrets
+        run: |
+          echo "Username length: ${#DOCKER_USERNAME}"
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
